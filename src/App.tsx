@@ -369,11 +369,13 @@ const FeedView = ({ onSelectChallenge }: { onSelectChallenge: (c: Challenge) => 
   useEffect(() => {
     const q = query(collection(db, 'challenges'), orderBy('timestamp', 'desc'), limit(20));
     return onSnapshot(q, snap => {
-      setChallenges(snap.docs.map(d => {
+      const result = snap.docs.map(d => {
         const data = d.data();
         if (typeof data.poseData === 'string') data.poseData = JSON.parse(data.poseData);
         return { id: d.id, ...data } as Challenge;
-      }));
+      });
+      console.log('challenges:', result);
+      setChallenges(result);
       setLoading(false);
     });
   }, []);
