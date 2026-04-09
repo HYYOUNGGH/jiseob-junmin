@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information including gamification data",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "description": "User's display name" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "level": { "type": "integer", "description": "User's current level" },
+        "exp": { "type": "integer", "description": "User's current experience points" },
+        "badges": { "type": "array", "items": { "type": "string" }, "description": "List of badge IDs earned" }
+      },
+      "required": ["displayName", "level", "exp"]
+    },
+    "Challenge": {
+      "title": "Challenge",
+      "description": "A dance or workout challenge",
+      "type": "object",
+      "properties": {
+        "title": { "type": "object", "description": "Multilingual title" },
+        "videoUrl": { "type": "string", "description": "URL to the challenge video" },
+        "thumbnail": { "type": "string", "description": "URL to the thumbnail image" },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "poseData": { "type": "string", "description": "JSON string of pose landmarks" }
+      },
+      "required": ["title", "videoUrl", "difficulty"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "A user's attempt at a challenge",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user" },
+        "challengeId": { "type": "string", "description": "ID of the challenge" },
+        "score": { "type": "integer", "description": "Final score achieved" },
+        "accuracy": { "type": "number", "description": "Accuracy percentage" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "challengeId", "score", "accuracy", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents"
+    },
+    "/challenges/{challengeId}": {
+      "schema": "Challenge",
+      "description": "Challenge definitions"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "Submission",
+      "description": "User challenge submissions"
+    }
+  }
+}

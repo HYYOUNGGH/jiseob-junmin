@@ -1,0 +1,5 @@
+{
+  "name": "지섭이와 준민이 (Jiseob & Junmin)",
+  "description": "AI 기반 숏폼 챌린지 소셜 플랫폼. AI 동작 분석을 통한 튜토리얼 생성 및 실시간 동작 채점 기능을 제공합니다.",
+  "requestFramePermissions": ["camera", "microphone"]
+}
